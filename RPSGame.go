@@ -7,24 +7,24 @@ import (
 )
 
 func DrawElement(x int) {
-	paper := `
-		______
+	paper :=
+		`	______
 	---'    ____)____
 			   ______)
 			  _______)
 			 _______)
 	---.__________)`
 
-	scissor := `    
-		_______
+	scissor :=
+		`_______
 	---'   ____)____
 			  ______)
 		   __________)
 		  (____)
 	---.__(___)`
 
-	rock := `   
-	 _______
+	rock :=
+		` _______
 	---'   ____)
 		  (_____)
 		  (_____)
@@ -44,17 +44,27 @@ func DrawElement(x int) {
 }
 
 func Game() {
-	var player int // Player and Machine element choices
+	var player int // Player and Machine element choices.
 	fmt.Println("<<Choose your element>>\n\n<<  Rock - 0  >>\n<<  Paper - 1  >>\n<<  Scissor - 2  >>\n\nElement: ")
 	fmt.Scan(&player)
 	for player < 0 || player > 2 {
 		fmt.Println("<<Insert a valid option>>\nElement ==>")
 		fmt.Scan(&player)
 	}
-	machine := rand.Intn(3)
-	fmt.Println(machine)
-	fmt.Println(Win(player, machine))
+	fmt.Println("\n\n<<You chose>>\n")
 	DrawElement(player)
+	machine := rand.Intn(3) // Computer picks an random number from 0 to 3.
+	fmt.Println("\n\n<<Computer chose>>\n")
+	DrawElement(machine)
+	result := Win(player, machine)
+	switch result {
+	case 0:
+		fmt.Println("\n\n<<YOU WIN!!!>>\n")
+	case 1:
+		fmt.Println("\n\n<<YOU LOST :(>>")
+	case 2:
+		fmt.Println("\n\n<<DRAW!>>")
+	}
 }
 
 func Win(p int, m int) int {
